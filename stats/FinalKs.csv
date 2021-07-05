@@ -1,4 +1,4 @@
-"Rank","Player","Team","Points","Games","Avg"
+"Rank","name","Team","Points","Games","Avg"
 "1","Jason Sanders","MIA","163.0","15","10.9"
 "2","Younghoe Koo","ATL","159.0","14","11.4"
 "3","Daniel Carlson","LV","149.0","15","9.9"
@@ -45,5 +45,3 @@
 "44","Brandon Wright","LAR","1.0","1","1.0"
 "44","Taylor Russolino","DEN","1.0","1","1.0"
 "46","Ty Long","LAC","-2.8","15","-0.2"
-""
-""

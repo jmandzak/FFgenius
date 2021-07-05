@@ -1,4 +1,4 @@
-"Rank","Player","Team","Points","Games","Avg"
+"Rank","name","Team","Points","Games","Avg"
 "1","Davante Adams","GB","341.8","13","26.3"
 "2","Tyreek Hill","KC","328.9","15","21.9"
 "3","Stefon Diggs","BUF","314.0","15","20.9"
@@ -248,5 +248,3 @@
 "247","Kendall Hinton","DEN","-0.8","1","-0.8"
 "248","Nsimba Webster","LAR","-2.0","15","-0.1"
 "248","Dwayne Harris","CHI","-2.0","3","-0.7"
-""
-""

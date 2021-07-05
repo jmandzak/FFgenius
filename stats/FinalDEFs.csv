@@ -1,4 +1,4 @@
-"Rank","Team","Points","Games","Avg"
+"Rank","name","Points","Games","Avg"
 "1","Pittsburgh Steelers","144.0","15","9.6"
 "2","Miami Dolphins","140.0","15","9.3"
 "3","Indianapolis Colts","137.0","15","9.1"
@@ -31,5 +31,3 @@
 "30","Houston Texans","41.0","15","2.7"
 "31","Las Vegas Raiders","38.0","15","2.5"
 "32","Detroit Lions","30.0","15","2.0"
-""
-""

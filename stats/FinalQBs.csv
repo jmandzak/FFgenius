@@ -1,4 +1,4 @@
-"Rank","Player","Team","Points","Games","Avg"
+"Rank","name","Team","Points","Games","Avg"
 "1","Kyler Murray","ARI","386.96","15","25.80"
 "2","Josh Allen","BUF","384.80","15","25.65"
 "3","Patrick Mahomes II","KC","380.40","15","25.36"
@@ -80,5 +80,3 @@
 "79","Mason Rudolph","PIT","-0.34","3","-0.11"
 "80","Matt Schaub","ATL","-0.40","1","-0.40"
 "81","Tim Boyle","DET","-0.90","8","-0.11"
-""
-""
