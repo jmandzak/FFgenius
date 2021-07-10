@@ -38,19 +38,19 @@ abbr = {
 }
 
 # create all the initial dataframes
-final_QBs = pd.read_csv("stats/FinalQBs.csv")
-final_RBs = pd.read_csv("stats/FinalRBs.csv")
-final_WRs = pd.read_csv("stats/FinalWRs.csv")
-final_TEs = pd.read_csv("stats/FinalTEs.csv")
-final_DEFs = pd.read_csv("stats/FinalDEFs.csv")
-final_Ks = pd.read_csv("stats/FinalKs.csv")
+final_QBs = pd.read_csv("stats/FinalQBs.csv", thousands=',')
+final_RBs = pd.read_csv("stats/FinalRBs.csv", thousands=',')
+final_WRs = pd.read_csv("stats/FinalWRs.csv", thousands=',')
+final_TEs = pd.read_csv("stats/FinalTEs.csv", thousands=',')
+final_DEFs = pd.read_csv("stats/FinalDEFs.csv", thousands=',')
+final_Ks = pd.read_csv("stats/FinalKs.csv", thousands=',')
 
-QBs = pd.read_csv("stats/QBs.csv")
-RBs = pd.read_csv("stats/RBs.csv")
-WRs = pd.read_csv("stats/WRs.csv")
-TEs = pd.read_csv("stats/TEs.csv")
-DEFs = pd.read_csv("stats/DEFs.csv")
-Ks = pd.read_csv("stats/Ks.csv")
+QBs = pd.read_csv("stats/QBs.csv", thousands=',')
+RBs = pd.read_csv("stats/RBs.csv", thousands=',')
+WRs = pd.read_csv("stats/WRs.csv", thousands=',')
+TEs = pd.read_csv("stats/TEs.csv", thousands=',')
+DEFs = pd.read_csv("stats/DEFs.csv", thousands=',')
+Ks = pd.read_csv("stats/Ks.csv", thousands=',')
 
 all_final_dfs_except_defs = [final_QBs, final_RBs, final_WRs, final_TEs, final_Ks]
 all_dfs_except_defs = [QBs, RBs, WRs, TEs, Ks]
@@ -68,7 +68,9 @@ for i, row in final_DEFs.iterrows():
     abbreviation = abbr[row["name"]]
     final_DEFs.at[i, "name"] = abbreviation
 
-print(final_DEFs)
+Ks.drop('team', inplace=True, axis=1)
+for i, row in Ks.iterrows():
+    Ks.at[i, "FGpercent"] = row["FGpercent"].strip('%')
 
 qbDF = final_QBs.merge(QBs, how="inner", on="name")
 rbDF = final_RBs.merge(RBs, how="inner", on="name")
@@ -104,8 +106,8 @@ for df, file in zip(out_list, out_files):
     # 3 possible dependent variables to use
     # Points, Avg, Rank
     # only leave one commented
-    filtered_df.drop('Avg', inplace=True, axis=1)
-    #filtered_df.drop('Points', inplace=True, axis=1)
+    #filtered_df.drop('Avg', inplace=True, axis=1)
+    filtered_df.drop('Points', inplace=True, axis=1)
     filtered_df.drop('Rank', inplace=True, axis=1)
 
     filtered_df.to_csv(file, index=False)
