@@ -74,7 +74,7 @@ for df, title in zip(all_dfs, titles):
     pipe_mlr.append(round(mean_squared_error(y_test, predicted_vals), 2))
     pipe_mlr.append(round(sqrt(mean_squared_error(y_test, predicted_vals)), 2))
 
-    rfreg = RandomForestRegressor(n_estimators=1000, max_depth=5, random_state=0)
+    rfreg = RandomForestRegressor(n_estimators=1000, n_jobs=-1)
     rfreg.fit(X_train, y_train)
     print('Random Forest r2 Score:               ', round(rfreg.score(X_test, y_test), 2))
     predicted_vals = rfreg.predict(X_test)
@@ -88,7 +88,7 @@ for df, title in zip(all_dfs, titles):
     rfr.append(round(mean_squared_error(y_test, predicted_vals), 2))
     rfr.append(round(sqrt(mean_squared_error(y_test, predicted_vals)), 2))
 
-    pipe = make_pipeline(StandardScaler(), RandomForestRegressor(n_estimators=1000))
+    pipe = make_pipeline(StandardScaler(), RandomForestRegressor(n_estimators=10000, n_jobs=-1))
     pipe.fit(X_train, y_train)
     print('RFR Pipe R2 score:                    ', round(pipe.score(X_test, y_test), 2))
     predicted_vals = pipe.predict(X_test)
