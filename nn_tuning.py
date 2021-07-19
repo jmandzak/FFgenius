@@ -1,7 +1,5 @@
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-import logging
-from numpy.core.fromnumeric import mean
 import pandas as pd
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import r2_score, mean_squared_error
@@ -10,8 +8,9 @@ from math import sqrt
 from keras import models, layers
 from keras.wrappers.scikit_learn import KerasRegressor
 import numpy as np
+import matplotlib.pyplot as plt
 
-def create_mlp(hidden_layers=3, activation='relu', optimizer='adam'):
+def create_mlp(hidden_layers=3, activation='relu', optimizer='adam', num_neurons=16):
     model = models.Sequential()
 
     # input layer
@@ -19,10 +18,10 @@ def create_mlp(hidden_layers=3, activation='relu', optimizer='adam'):
 
     # hidden layers
     for _ in range(hidden_layers):
-        model.add(layers.Dense(64, activation=activation))
+        model.add(layers.Dense(num_neurons, activation=activation))
 
     model.add(layers.Dense(1, activation='linear'))
-    model.compile(loss= "mean_squared_error" , optimizer=optimizer, metrics=["mean_absolute_error"])
+    model.compile(loss= "mean_square_error" , optimizer=optimizer, metrics=["mean_absolute_error"])
     return model
 
 def main():
@@ -36,23 +35,24 @@ def main():
     all_dfs = [QBs, RBs, WRs, TEs, Ks]
     titles = ["QBs", "RBs", "WRs", "TEs", "Ks"]
     param_grid = {
-        'batch_size': [5, 10],
-        'epochs': [100, 200, 300],
-        'optimizer': ['Adam', 'SGD'],
-        'hidden_layers': [1, 3, 5],
-        'activation': ['relu', 'softplus', 'tanh']
+        'batch_size': [10],
+        'epochs': [100, 300],
+        'optimizer': ['SGD'],
+        'hidden_layers': [4, 5],
+        'activation': ['softsign'],
+        'num_neurons': [128]
     }
 
     f = open('nn_tuning_results.txt', 'w')
 
     for df, title in zip(all_dfs, titles):
         df.drop('name', inplace=True, axis=1)
-        df = pd.get_dummies(df)
+        df.drop('Team', inplace=True, axis=1)
 
         X = df.drop('Avg', inplace=False, axis=1)
         X = X.values.astype(np.float64)
         y = df['Avg']
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
         scaler = StandardScaler()
         scaler.fit(X_train)
@@ -60,17 +60,12 @@ def main():
         X_test_scaled = scaler.transform(X_test)
 
         model = KerasRegressor(build_fn=create_mlp, verbose=0)
-        grid = GridSearchCV(estimator=model, param_grid=param_grid, scoring='neg_mean_squared_error', n_jobs=-1)
+        grid = GridSearchCV(estimator=model, param_grid=param_grid, scoring='neg_mean_square_error', n_jobs=-1)
         grid_result = grid.fit(X_train_scaled, y_train)
 
         # summarize results
         f.write(f'Position: {title}\n')
         f.write(f'Best: {grid_result.best_score_} using {grid_result.best_params_}\n')
-        means = grid_result.cv_results_['mean_test_score']
-        stds = grid_result.cv_results_['std_test_score']
-        params = grid_result.cv_results_['params']
-        for mean, stdev, param in zip(means, stds, params):
-            f.write(f'{mean} ({stdev}) with: {param}\n')
 
         best_model = grid_result.best_estimator_
         predicted_vals = best_model.predict(X_test_scaled)
@@ -79,6 +74,14 @@ def main():
         f.write(f'Neural Net Mean Absolute Error:        {round(np.mean(errors), 2)} points.\n')
         f.write(f'Neural Net Mean Square Error:          {round(mean_squared_error(y_test, predicted_vals), 2)} points.\n')
         f.write(f'Neural Net RootMean Square Error:      {round(sqrt(mean_squared_error(y_test, predicted_vals)), 2)} points.\n\n')
+
+        ax = plt.gca()
+        ax.scatter((list(range(len(predicted_vals)))), list(predicted_vals), color="b")
+        ax.scatter((list(range(len(predicted_vals)))), list(y_test), color="r")
+        plt.yticks(np.arange(min((list(predicted_vals) + list(y_test))), max((list(predicted_vals) + list(y_test)))+1, 1.0))
+        plt.xticks(np.arange(min(list(range(len(predicted_vals)))), max(list(range(len(predicted_vals))))+1, 1.0))
+        plt.show()
+        plt.close()
 
         return
 
