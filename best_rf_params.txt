@@ -1,34 +1,34 @@
 QBs
-{'bootstrap': True, 'max_depth': 30, 'max_features': 'auto', 'min_samples_leaf': 2, 'min_samples_split': 2, 'n_estimators': 400, 'n_jobs': -1}
+{'bootstrap': True, 'max_depth': 30, 'max_features': 'auto', 'min_samples_leaf': 2, 'min_samples_split': 2, 'n_estimators': 400}
 Grid Random Forest r2 Score:                0.3
 Grid Random Forest Mean Absolute Error:     3.35 points.
 Grid Random Forest Mean Square Error:       18.99 points.
 Grid Random Forest Root Mean Square Error:  4.36 points.
 
 RBs
-{'bootstrap': True, 'max_depth': 70, 'max_features': 'sqrt', 'min_samples_leaf': 2, 'min_samples_split': 2, 'n_estimators': 400, 'n_jobs': stimators': 400, 'n_jobs': -1}
+{'bootstrap': True, 'max_depth': 70, 'max_features': 'sqrt', 'min_samples_leaf': 2, 'min_samples_split': 2, 'n_estimators': 400}
 Grid Random Forest r2 Score:                0.57
 Grid Random Forest Mean Absolute Error:     3.06 points.
 Grid Random Forest Mean Square Error:       12.03 points.
 Grid Random Forest Root Mean Square Error:  3.47 points.
 
 WRs
-{'bootstrap': True, 'max_depth': 110, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'min_samples_split': 10, 'n_estimators': 200, 'n_jobs'_estimators': 200, 'n_jobs': -1}
+{'bootstrap': True, 'max_depth': 110, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'min_samples_split': 10, 'n_estimators': 200}
 Grid Random Forest r2 Score:                0.74
 Grid Random Forest Mean Absolute Error:     2.4 points.
 Grid Random Forest Mean Square Error:       7.67 points.
 Grid Random Forest Root Mean Square Error:  2.77 points.
 
 TEs
-{'bootstrap': True, 'max_depth': 10, 'max_features': 'auto', 'min_samples_leaf': 1, 'min_samples_split': 5, 'n_estimators': 400, 'n_jobs': -1}
+{'bootstrap': True, 'max_depth': 10, 'max_features': 'auto', 'min_samples_leaf': 1, 'min_samples_split': 5, 'n_estimators': 400}
 Grid Random Forest r2 Score:                0.24
 Grid Random Forest Mean Absolute Error:     2.0 points.
 Grid Random Forest Mean Square Error:       6.88 points.
 Grid Random Forest Root Mean Square Error:  2.62 points.
 
 Ks
-{'bootstrap': False, 'max_depth': 110, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 200, 'n_jobs': -1}
-Grid Random Forest r2 Score:                		-6.65
-Grid Random Forest Mean Absolute Error:     	1.28 points.
+{'bootstrap': False, 'max_depth': 110, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 200}
+Grid Random Forest r2 Score:                -6.65
+Grid Random Forest Mean Absolute Error:     1.28 points.
 Grid Random Forest Mean Square Error:      	1.79 points.
-Grid Random Forest Root Mean Square Error:  	1.34 points.
+Grid Random Forest Root Mean Square Error:  1.34 points.
