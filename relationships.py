@@ -17,7 +17,7 @@ for df, title in zip(all_dfs, titles):
     corr = df.corr()
     corr = np.abs(corr)
 
-    dataplot = sb.heatmap(corr[['Points']].sort_values(by=['Points'], ascending=False), cmap="coolwarm", annot=True)
+    dataplot = sb.heatmap(corr[['Avg']].sort_values(by=['Avg'], ascending=False), cmap="coolwarm", annot=True)
     plt.title(title)
     plt.show()
     plt.close()
